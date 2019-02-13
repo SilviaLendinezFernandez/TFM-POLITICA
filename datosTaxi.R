@@ -15,9 +15,11 @@ hist(datos$Potencia)
 
 table(table(datos$Matrícula)) # Contamos las frecuencias de Código # Para ver duplicados
 
-# Si queremos cambiar los nombres a las columnas tenemos dos formas de hacerlo:
+# EN PRIMER LUGAR VAMOS A CAMBIAR LOS NOMBRES DE LAS COLUMNAS
 
-# O bien una a una 
+# Tenemos dos formas de hacerlo:
+
+# 1) O bien una a una (pero si son muchas no tiene sentido)
 mi.datos <- datos
 colnames(mi.datos)[1] <- "codigo"
 colnames(mi.datos)[2] <- "matricula"
@@ -28,14 +30,28 @@ colnames(mi.datos)[13] <- "fecha_inicio_prestacion"
 colnames(mi.datos)[15] <- "regimen_eurotaxi"
 colnames(mi.datos)[16] <- "fecha_inicio_eurotaxi"
 colnames(mi.datos)[17] <- "fecha_fin_eurotaxi"
-colnames(mi.datos)
 
-# O bien buscando los . y las tildes y quitándolas
+# 2) O bien paso por paso como vamos a hacer ahora:
+
+#Primero quitamos todas las mayúsculas
 mi.datos2 <- datos
+colnames(mi.datos2) <- sapply(colnames(mi.datos2), tolower) 
 
-iconv(colnames(mi.datos2), to="ASCII//TRANSLIT") #Quito las tildes
-gsub("\\.", " ", colnames(mi.datos2)) #Quito los puntos y los sustituyo por espacios
+# Buscamos los . y los sustituimos por _
+colnames(mi.datos2) <- gsub("\\.", "_", colnames(mi.datos2)) 
+
+#Por ultimo quitamos todas las tildes
+colnames(mi.datos2) <- iconv(colnames(mi.datos2), to='ASCII//TRANSLIT')
+
+
+#Si aun asi, vemos que tenemos nombres muy largos...
+#Acortamos algunos de los nombres de ciertas columnas específicas 
+colnames(mi.datos2)[12] <- "numero_plazas"
+colnames(mi.datos2)[13] <- "fecha_inicio_prestacion"
+colnames(mi.datos2)[15] <- "regimen_eurotaxi"
+colnames(mi.datos2)[16] <- "fecha_inicio_eurotaxi"
+colnames(mi.datos2)[17] <- "fecha_fin_eurotaxi"
+
 colnames(mi.datos2)
 
-#a-zA-ZÀ 
-#"[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+
