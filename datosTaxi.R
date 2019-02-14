@@ -9,11 +9,11 @@ datos[datos$Combustible == "DIESEL",] # Nos devuelve todos los taxis cuyo combus
 
 plot(datos$Combustible , datos$Marca)
 
-head(datos[datos$Número.de.Plazas > 5 & datos$Clasificación.medioambiental == "ECO",],5)
+head(datos[datos$N�mero.de.Plazas > 5 & datos$Clasificaci�n.medioambiental == "ECO",],5)
 
 hist(datos$Potencia)
 
-table(table(datos$Matrícula)) # Contamos las frecuencias de Código # Para ver duplicados
+table(table(datos$Matricula)) # Contamos las frecuencias de Código # Para ver duplicados
 
 # EN PRIMER LUGAR VAMOS A CAMBIAR LOS NOMBRES DE LAS COLUMNAS
 
@@ -53,5 +53,3 @@ colnames(mi.datos2)[16] <- "fecha_inicio_eurotaxi"
 colnames(mi.datos2)[17] <- "fecha_fin_eurotaxi"
 
 colnames(mi.datos2)
-
-
